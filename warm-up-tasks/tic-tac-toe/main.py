@@ -17,31 +17,45 @@ def drawGrid():
 
 def checkPosition(pos):
     if pos[0] > 0 and pos[0] < 267 and pos[1] > 100 and pos[1] < 367:
-        return True
+        return [True, 0, 100]
     if pos[0] > 267 and pos[0] < 534 and pos[1] > 100 and pos[1] < 367:
-        return True
+        return [True, 267, 100]
     if pos[0] > 534 and pos[0] < 900 and pos[1] > 100 and pos[1] < 367:
-        return True
+        return [True, 534, 100]
     
     if pos[0] > 0 and pos[0] < 267 and pos[1] > 367 and pos[1] < 634:
-        return True
+        return [True, 0, 367]
     if pos[0] > 267 and pos[0] < 534 and pos[1] > 367 and pos[1] < 634:
-        return True
+        return [True, 267, 367]
     if pos[0] > 534 and pos[0] < 900 and pos[1] > 367 and pos[1] < 634:
-        return True
+        return [True, 534, 367]
 
     if pos[0] > 0 and pos[0] < 267 and pos[1] > 634 and pos[1] < 900:
-        return True
+        return [True, 0, 534]
     if pos[0] > 267 and pos[0] < 534 and pos[1] > 634 and pos[1] < 900:
-        return True
+        return [True, 267, 534]
     if pos[0] > 534 and pos[0] < 900 and pos[1] > 634 and pos[1] < 900:
-        return True   
+        return [True, 534,534]
 
-def playerMove(move, isCorrect):
-    if move and isCorrect:
+    return [False, None, None]
+
+def drawCross(pos_0, pos_1):
+    pygame.draw.line(screen, RED, (pos_0 + 25, pos_1 + 25), (pos_0 + 242, pos_1 + 242), 10)
+    pygame.draw.line(screen, RED, (pos_0 + 25, pos_1 + 242), (pos_0 + 242, pos_1 + 25), 10)
+
+def drawCircle(pos_0, pos_1):
+    pygame.draw.circle(screen, RED, (pos_0 + 133, pos_1 + 133), 50)
+
+def playerMove(move, isValid):
+    
+    if move == True and isValid == True:
         print("X")
-    elif not move and isCorrect:
+        return [False, True]
+    elif move == False and isValid == True:
         print("O")
+        return [True, False]
+    else:
+        return [move, None]
         
 # Constants
 WHITE = (255,255,255)
@@ -59,6 +73,8 @@ pygame.display.set_caption("Tic Tac Toe")
 clock = pygame.time.Clock()
 running = True
 
+isCross = False
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -67,12 +83,18 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
 
-            playerMove(player, checkPosition(pos))
-            player = not player
+            valid, pos_0, pos_1 = checkPosition(pos)
+            player, isCross = playerMove(player, valid)
 
     screen.fill(WHITE)
 
     drawGrid()
+    if isCross:
+        drawCross(pos_0, pos_1)
+    elif isCross == None:
+        pass
+    else:
+        drawCircle(pos_0, pos_1)
 
     pygame.display.flip()
     clock.tick(60)
