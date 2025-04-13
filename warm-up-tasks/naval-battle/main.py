@@ -12,10 +12,10 @@ HEIGHT = 800
 
 """ OBJECTS """
 class Board:
-    def __init(self, size):
+    def __init__(self, size):
         self.size = size
         self.grid = [[' ' for _ in range(size)] for _ in range(size)]
-    
+
     def placeShip(self, ship, x, y, direction):
 
         pass
@@ -25,8 +25,19 @@ class Board:
         pass
 
     def display(self):
-        for row in self.grid:
-            print(' '.join(row))
+        cell_size = 40  # Размер одной клетки
+        offset_x = 50   # Смещение от левого края
+        offset_y = 50   # Смещение от верхнего края
+
+        # Вертикальные линии
+        for i in range(self.size + 1):
+            x = offset_x + i * cell_size
+            pygame.draw.line(screen, BLACK, (x, offset_y), (x, offset_y + self.size * cell_size))
+
+        # Горизонтальные линии
+        for j in range(self.size + 1):
+            y = offset_y + j * cell_size
+            pygame.draw.line(screen, BLACK, (offset_x, y), (offset_x + self.size * cell_size, y))
 
 
 class Ship:
@@ -67,6 +78,8 @@ class Game:
         self.player2 = player2
         self.currentPlayer = player1
 
+        self.board = Board(10)
+
     def switchTurn(self):
         if self.currentPlayer == self.player1:
             self.currentPlayer = self.player2
@@ -74,8 +87,14 @@ class Game:
             self.currentPlayer = self.player1
     
     def play(self):
-
+        self.board.display()
         pass
+
+player1 = Player("first")
+player2 = Player("second")
+    
+game = Game(player1, player2)
+    
 
 size = (WIDTH, HEIGHT)
 screen = pygame.display.set_mode(size)
@@ -90,8 +109,10 @@ while running:
             running = False
     
     screen.fill(WHITE)
-    pygame.display.flip()
 
+    game.board.display()
+
+    pygame.display.flip()
     clock.tick(60)
 
 pygame.quit()
