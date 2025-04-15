@@ -10,6 +10,27 @@ WIDTH = 700
 HEIGHT = 500
 
 pygame.init()
+pygame.font.init()
+
+class Board:
+    def __init__(self):
+
+        pass
+
+class Ball:
+    def __init__(self):
+
+        pass
+
+class Player:
+    def __init__(self):
+
+        pass
+
+class Game:
+    def __init__(self):
+
+        pass
  
 # Set the width and height of the screen [width, height]
 size = (WIDTH, HEIGHT)
