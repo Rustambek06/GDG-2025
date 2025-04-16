@@ -6,32 +6,82 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
  
-WIDTH = 700
-HEIGHT = 500
+WIDTH = 800
+HEIGHT = 600
 
 pygame.init()
 pygame.font.init()
 
-class Board:
-    def __init__(self):
-
-        pass
-
 class Ball:
     def __init__(self):
+        self.x = WIDTH // 2
+        self.y = HEIGHT // 2
+        self.radius = 10
+        self.dx = 4
+        self.dy = 0  # начальное направление по Y — ноль
 
-        pass
+    def move(self):
+        self.x += self.dx
+        self.y += self.dy
+
+        if self.y - self.radius <= 0 or self.y + self.radius >= HEIGHT:
+            self.dy *= -1
+
+    def bounceFromPaddle(self, paddle):
+        offset = (self.y - paddle.rect.centery) / (paddle.height / 2)
+        max_speed = 5
+        self.dy = offset * max_speed
+        self.dx *= -1
+
+    def getRect(self):
+        return pygame.Rect(self.x - self.radius, self.y - self.radius, self.radius * 2, self.radius * 2)
+
+    def display(self):
+        pygame.draw.circle(screen, RED, (self.x, self.y), self.radius)
 
 class Player:
-    def __init__(self):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.width = 20
+        self.height = 100
+        self.speed = 1
+
+        self.rect = pygame.Rect(self.x, abs(self.y - self.height), self.width, self.height)
 
         pass
+
+    def moveUp(self):
+        if self.y > 100:
+            self.y -= 10
+
+        pass
+
+    def moveDown(self):
+        if self.y < 600:
+            self.y += 10
+
+        pass
+
+    def display(self):
+        self.rect = pygame.Rect(self.x, abs(self.y - self.height), self.width, self.height)
+
+        pygame.draw.rect(screen, BLACK, self.rect)
 
 class Game:
     def __init__(self):
 
         pass
+
+    def display(self):
+
+        pass
  
+player1 = Player(40, HEIGHT // 2)
+player2 = Player(WIDTH - 60, HEIGHT // 2)
+
+ball = Ball()
+
 # Set the width and height of the screen [width, height]
 size = (WIDTH, HEIGHT)
 screen = pygame.display.set_mode(size)
@@ -49,8 +99,24 @@ while running:
     # --- Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done = True
+            running = False
+        
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_UP]:
+        player2.moveUp()
+    if keys[pygame.K_DOWN]:
+        player2.moveDown()
+    if keys[pygame.K_w]:
+        player1.moveUp()
+    if keys[pygame.K_s]:
+        player1.moveDown()
  
+    if player1.rect.colliderect(ball.getRect()):
+        ball.bounceFromPaddle(player1)
+    if player2.rect.colliderect(ball.getRect()):
+        ball.bounceFromPaddle(player2)
+
     # --- Game logic should go here
  
     # --- Screen-clearing code goes here
@@ -63,7 +129,13 @@ while running:
     screen.fill(WHITE)
  
     # --- Drawing code should go here
- 
+
+    player1.display()
+    player2.display()
+
+    ball.move()
+    ball.display()
+
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
