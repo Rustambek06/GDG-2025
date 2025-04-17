@@ -20,8 +20,15 @@ class Ball:
         self.dx = 4
         self.dy = 0  # начальное направление по Y — ноль
 
-    def move(self):
-        self.x += self.dx
+    def isBallOut(self):
+        if 5 > self.x or self.x > 795:
+            self.x = WIDTH // 2
+            self.y = HEIGHT // 2
+            return True
+        return False
+
+    def move(self, direction):
+        self.x += self.dx * direction
         self.y += self.dy
 
         if self.y - self.radius <= 0 or self.y + self.radius >= HEIGHT:
@@ -77,6 +84,10 @@ class Game:
 
         pass
  
+isGameStarted = False
+ballDirection = 1
+playerTurn = 0
+
 player1 = Player(40, HEIGHT // 2)
 player2 = Player(WIDTH - 60, HEIGHT // 2)
 
@@ -100,7 +111,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                isGameStarted = True
         
+    # --- Game logic should go here
+ 
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_UP]:
@@ -117,8 +133,16 @@ while running:
     if player2.rect.colliderect(ball.getRect()):
         ball.bounceFromPaddle(player2)
 
-    # --- Game logic should go here
- 
+    if ball.isBallOut():
+        isGameStarted = False
+        playerTurn += 1
+        if playerTurn == 2:
+            playerTurn = 0
+            ballDirection *= -1
+    else:
+        if isGameStarted:
+            ball.move(ballDirection)
+
     # --- Screen-clearing code goes here
  
     # Here, we clear the screen to white. Don't put other drawing commands
@@ -133,7 +157,6 @@ while running:
     player1.display()
     player2.display()
 
-    ball.move()
     ball.display()
 
     # --- Go ahead and update the screen with what we've drawn.
