@@ -16,7 +16,7 @@ CELL_SIZE = 40
 
 # Шрифты для координат и текста
 COORD_FONT = pygame.font.SysFont(None, 24)
-TEXT_FONT   = pygame.font.SysFont(None, 36)
+TEXT_FONT = pygame.font.SysFont(None, 36)
 
 """ OBJECTS """
 class Board:
