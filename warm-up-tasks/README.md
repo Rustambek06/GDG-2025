@@ -64,7 +64,7 @@ A simple yet addictive two-player table tennis game. Players control paddles to 
 
 5. Run any game:
 
-    ```bash
+    ```
     python tic_tac_toe.py
     python naval_battle.py
     python ping_pong.py
