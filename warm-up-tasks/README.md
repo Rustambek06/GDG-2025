@@ -74,13 +74,14 @@ A simple yet addictive two-player table tennis game. Players control paddles to 
 
 ## 📂 Project Structure
 
-classic-games-collection/ 
- │
- ├── tic_tac_toe.py # Tic-Tac-Toe game 
- ├── naval_battle.py # Naval Battle (Battleship) game 
- ├── ping_pong.py # Ping-Pong game 
- ├── README.md # Project README file
-
+    ```bash
+    warm-up-tasks/ 
+    │
+    ├── tic_tac_toe.py # Tic-Tac-Toe game 
+    ├── naval_battle.py # Naval Battle (Battleship) game 
+    ├── ping_pong.py # Ping-Pong game 
+    ├── README.md # Project README file
+    ```
  
 ---
 
