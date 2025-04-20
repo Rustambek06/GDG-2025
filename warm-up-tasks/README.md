@@ -53,13 +53,13 @@ A simple yet addictive two-player table tennis game. Players control paddles to 
 3. Clone this repository:
 
     ```bash
-    git clone https://github.com/your-username/classic-games-collection.git
+    git clone https://github.com/Rustambek06/GDG-2025.git
     ```
 
 4. Navigate into the project folder:
 
     ```bash
-    cd classic-games-collection
+    cd warm-up-tasks
     ```
 
 5. Run any game:
@@ -77,9 +77,9 @@ A simple yet addictive two-player table tennis game. Players control paddles to 
     ```
     warm-up-tasks/ 
     │
-    ├── tic_tac_toe.py # Tic-Tac-Toe game 
-    ├── naval_battle.py # Naval Battle (Battleship) game 
-    ├── ping_pong.py # Ping-Pong game 
+    ├── tic-tac-toe.py # Tic-Tac-Toe game 
+    ├── naval-battle.py # Naval Battle (Battleship) game 
+    ├── ping-pong.py # Ping-Pong game 
     ├── README.md # Project README file
     ```
  
@@ -103,7 +103,7 @@ This project is licensed under the **MIT License** — see the `LICENSE` file fo
 
 If you have any questions, feel free to reach out:
 
-- GitHub: [your-username](https://github.com/your-username)
+- GitHub: [your-username](https://github.com/Rustambek06)
 
 ---
 
