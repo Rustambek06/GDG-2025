@@ -13,9 +13,9 @@ Each game is built from scratch to deliver a simple, nostalgic gaming experience
 
 ## 🚀 Demo Videos
 
-- 🔹 [Tic-Tac-Toe Demo](https://youtu.be/sYZ_kOQ5SfI)
-- 🔹 [Naval Battle (Battleship) Demo](https://youtu.be/OEBhya8El1Y)
-- 🔹 [Ping-Pong Demo](https://youtu.be/ot08WqclmDQ)
+- 🔹 [Tic-Tac-Toe](https://youtu.be/sYZ_kOQ5SfI)
+- 🔹 [Naval Battle (Battleship)](https://youtu.be/OEBhya8El1Y)
+- 🔹 [Ping-Pong](https://youtu.be/ot08WqclmDQ)
 
 Check out the short gameplay videos to see each game in action!
 
